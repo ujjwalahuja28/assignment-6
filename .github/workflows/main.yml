@@ -1,31 +1,25 @@
-# name: CI
-# on: push
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Install modules
-#       run: npm install
-#     - name: Run tests
-#       run: npm run test
+name: Node.js CI
 
-
-
-name: CI
-
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Install dependencies
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install Dependencies
       run: npm install
 
-    - name: Run tests
+    - name: Run Tests
       run: npm run test
